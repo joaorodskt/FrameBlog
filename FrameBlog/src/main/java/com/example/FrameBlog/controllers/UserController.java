@@ -1,4 +1,4 @@
-package controllers;
+package com.example.FrameBlog.controllers;
 
 import java.util.List;
 
@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.FrameBlog.models.User;
-
-import services.UserService;
+import com.example.FrameBlog.services.UserService;
 
 @RestController
 @RequestMapping(path = "/users")
@@ -34,9 +33,9 @@ public class UserController {
 	}
 	
 	@GetMapping(path = "/get")
-	private @ResponseBody List<User> get(@RequestParam final Long id){
-		return userService.getid(id);
-	}
+    private @ResponseBody User get(@RequestParam final Long id){
+        return userService.get(id);
+    }
 	
 	@PostMapping(path = "/update")
 	private @ResponseBody User update(@RequestParam final Long id, @RequestBody User user) {
@@ -44,8 +43,8 @@ public class UserController {
 	}
 	
 	@DeleteMapping(path = "delete")
-	private @ResponseBody User delete(@RequestParam final Long id) {
-		return userService.delete(id);
+	private void delete(@RequestParam final Long id) {
+		userService.delete(id);
 	}
 	
 }

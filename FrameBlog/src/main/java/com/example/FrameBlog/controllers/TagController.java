@@ -1,4 +1,4 @@
-package controllers;
+package com.example.FrameBlog.controllers;
 
 import java.util.List;
 
@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.FrameBlog.models.Tag;
-
-import services.TagService;
+import com.example.FrameBlog.services.TagService;
 
 @RestController
 @RequestMapping(path = "/tags")
@@ -34,8 +33,8 @@ public class TagController {
 	}
 	
 	@GetMapping(path = "/get")
-	private @ResponseBody List<Tag> get(@RequestParam final Long id){
-		return tagService.getid(id);
+	private @ResponseBody Tag get(@RequestParam final Long id){
+		return tagService.get(id);
 	}
 	
 	@PostMapping(path = "/update")
@@ -44,8 +43,8 @@ public class TagController {
 	}
 	
 	@DeleteMapping(path = "delete")
-	private @ResponseBody Tag delete(@RequestParam final Long id) {
-		return tagService.delete(id);
+	private void delete(@RequestParam final Long id) {
+		tagService.delete(id);
 	}
 	
 }

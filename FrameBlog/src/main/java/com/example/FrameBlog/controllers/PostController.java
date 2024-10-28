@@ -1,4 +1,4 @@
-package controllers;
+package com.example.FrameBlog.controllers;
 
 import java.util.List;
 
@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.FrameBlog.models.Post;
-
-import services.PostService;
+import com.example.FrameBlog.services.PostService;
 
 @RestController
 @RequestMapping(path = "/posts")
@@ -34,8 +33,8 @@ public class PostController {
 	}
 	
 	@GetMapping(path = "/get")
-	private @ResponseBody List<Post> get(@RequestParam final Long id){
-		return postService.getid(id);
+	private @ResponseBody Post get(@RequestParam final Long id){
+		return postService.get(id);
 	}
 	
 	@PostMapping(path = "/update")
@@ -44,8 +43,8 @@ public class PostController {
 	}
 	
 	@DeleteMapping(path = "delete")
-	private @ResponseBody Post delete(@RequestParam final Long id) {
-		return postService.delete(id);
+	private void delete(@RequestParam final Long id) {
+		postService.delete(id);
 	}
 	
 }

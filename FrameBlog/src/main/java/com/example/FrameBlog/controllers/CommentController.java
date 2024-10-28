@@ -1,4 +1,4 @@
-package controllers;
+package com.example.FrameBlog.controllers;
 
 import java.util.List;
 
@@ -13,14 +13,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.FrameBlog.models.Comment;
-
-import services.CommentService;
+import com.example.FrameBlog.services.CommentService;
 
 @RestController
 @RequestMapping(path = "/comments")
 public class CommentController {
 
-	@Autowired
+	@Autowired(required=true)
 	private CommentService commentService;
 	
 	@PostMapping("/save")
@@ -34,8 +33,8 @@ public class CommentController {
 	}
 	
 	@GetMapping(path = "/get")
-	private @ResponseBody List<Comment> get(@RequestParam final Long id){
-		return commentService.getid(id);
+	private @ResponseBody Comment get(@RequestParam final Long id){
+		return commentService.get(id);
 	}
 	
 	@PostMapping(path = "/update")
@@ -44,8 +43,8 @@ public class CommentController {
 	}
 	
 	@DeleteMapping(path = "delete")
-	private @ResponseBody Comment delete(@RequestParam final Long id) {
-		return commentService.delete(id);
+	private void delete(@RequestParam final Long id) {
+		commentService.delete(id);
 	}
 	
 }

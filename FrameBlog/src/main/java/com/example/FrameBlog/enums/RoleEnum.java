@@ -1,4 +1,4 @@
-package enums;
+package com.example.FrameBlog.enums;
 
 public enum RoleEnum {
 
