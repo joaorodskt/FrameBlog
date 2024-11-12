@@ -1,9 +1,9 @@
 package com.example.FrameBlog.services.impl;
 
-public class PostServiceImpl {
+import org.springframework.stereotype.Service;
 
-	public PostServiceImpl() {
-		// TODO Auto-generated constructor stub
-	}
+@Service
+public class PostServiceImpl{
 
+  
 }

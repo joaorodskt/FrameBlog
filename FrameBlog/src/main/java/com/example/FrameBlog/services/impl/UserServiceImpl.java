@@ -11,6 +11,8 @@ import com.example.FrameBlog.models.User;
 import com.example.FrameBlog.repositories.UserRepository;
 import com.example.FrameBlog.services.UserService;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class UserServiceImpl implements UserService{
 
@@ -34,7 +36,7 @@ public class UserServiceImpl implements UserService{
 		
 		User newUser = userRepository.save(entity);
 		
-		return new User(newUser.getUserID(), newUser.getName(), newUser.getEmail(), newUser.getPassword(), newUser.getRole(), newUser.getUsername());
+		return new User(newUser.getUserID(), newUser.getName(), newUser.getEmail(), passwordHash, newUser.getRole(), newUser.getUsername());
 	}
 
 	@Override
@@ -44,7 +46,9 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User get(Long id) {
-		return userRepository.findById(id).orElse(null);
+		return userRepository.findById(id).orElseThrow(
+			() -> new EntityNotFoundException("User not found")
+		);
 	}
 
 	@Override
@@ -56,7 +60,7 @@ public class UserServiceImpl implements UserService{
             userUpdate.setUsername(user.getUsername());
             userUpdate.setEmail(user.getEmail());
             userUpdate.setRole(user.getRole());
-            userUpdate.setPassword(user.getPassword());
+            userUpdate.setPassword(passwordHash);
             return userRepository.save(userUpdate);
         }
         return null;
